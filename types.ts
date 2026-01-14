@@ -20,15 +20,14 @@ export interface DetailedService {
   title: string;
   objective: string;
   deliverables: string[];
-  time: string;
+  time?: string;
 }
 
-export interface CaseStudy {
+export interface PortfolioItem {
   title: string;
   description: string;
-  image: string;
+  video: string;
   alt: string;
-  kpis: string[];
 }
 
 export interface Testimonial {
@@ -37,6 +36,7 @@ export interface Testimonial {
   quote: string;
   highlight: string;
   image: string;
+  rating: number; // New property: 4.5 or 5
   date?: string;
 }
 

@@ -3,12 +3,26 @@ import React from 'react';
 
 const LoadingScreen: React.FC = () => {
   return (
-    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black">
-      <div className="relative w-24 h-24 mb-6">
-        <div className="absolute inset-0 border-4 border-primary/20 rounded-full"></div>
-        <div className="absolute inset-0 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    <div className="loader-container">
+      <div className="loader-3d mb-12">
+        <div className="inner-ring one"></div>
+        <div className="inner-ring two"></div>
+        <div className="inner-ring three"></div>
       </div>
-      <div className="text-primary font-black uppercase tracking-[0.4em] text-xs animate-pulse">Iniciando Ecosistema MitZay</div>
+      
+      <div className="relative flex flex-col items-center">
+        <img 
+          src="https://res.cloudinary.com/dsiuc68hp/image/upload/v1766544939/LOGO_BN-removebg-preview_eamv9k.png" 
+          className="w-10 h-10 object-contain mb-4 opacity-50 grayscale brightness-200"
+          alt="MitZay Logo"
+        />
+        <div className="text-primary font-black uppercase tracking-[0.5em] text-[10px] animate-pulse">
+          Sincronizando Núcleo MitZay
+        </div>
+        <div className="mt-2 text-white/20 text-[8px] font-bold uppercase tracking-[0.2em]">
+          Ecosistema Digital IA v2.5
+        </div>
+      </div>
     </div>
   );
 };
