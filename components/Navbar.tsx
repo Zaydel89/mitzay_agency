@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onScrollToSect
                 {link.page === 'home' && isHovered && (
                   <div className="ml-9 mt-2 flex flex-col gap-1">
                     {HOME_SECTIONS.map((sec) => (
-                      <button key={sec.index} onClick={() => onScrollToSection?.(sec.index)} className="text-left text-[8px] font-bold text-gray-500 hover:text-primary py-1 uppercase tracking-widest whitespace-nowrap">• {sec.label}</button>
+                      <button key={sec.index} onClick={() => onScrollToSection?.(sec.index)} className="text-left text-[8px] font-bold text-gray-500 hover:text-primary py-1 uppercase tracking-widest whitespace-nowrap transition-colors">• {sec.label}</button>
                     ))}
                   </div>
                 )}
@@ -48,10 +48,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onScrollToSect
         </div>
       </nav>
 
-      <nav className="fixed bottom-0 left-0 w-full h-16 glass border-t border-white/10 z-[150] flex md:hidden items-center justify-around px-6">
+      {/* MOBILE NAV BAR */}
+      <nav className="fixed bottom-0 left-0 w-full h-16 glass border-t border-white/10 z-[150] flex md:hidden items-center justify-around px-4">
         {NAV_LINKS.map(link => (
-          <button key={link.page} onClick={() => onNavigate(link.page)} className={`flex flex-col items-center gap-1 ${currentPage === link.page ? 'text-primary' : 'text-gray-500'}`}>
-            <span className="text-[8px] font-black tracking-widest uppercase">{link.label}</span>
+          <button 
+            key={link.page} 
+            onClick={() => onNavigate(link.page)} 
+            className={`flex flex-col items-center justify-center flex-1 h-full gap-1.5 transition-all ${currentPage === link.page ? 'text-primary' : 'text-gray-500'}`}
+          >
+            <div className={`w-1.5 h-1.5 rounded-full ${currentPage === link.page ? 'bg-primary' : 'bg-transparent'} transition-all`}></div>
+            <span className="text-[7px] font-black tracking-[0.2em] uppercase text-center">{link.label}</span>
           </button>
         ))}
       </nav>

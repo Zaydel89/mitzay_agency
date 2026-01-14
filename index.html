@@ -62,11 +62,8 @@
         font-family: 'Inter', sans-serif;
         margin: 0;
         padding: 0;
-      }
-
-      html, body {
-        overflow-x: hidden;
         width: 100%;
+        overflow-x: hidden;
       }
 
       @media (min-width: 768px) {
@@ -84,21 +81,20 @@
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
       .horizontal-section {
-        width: 100%;
+        width: 100vw;
         min-height: 100vh;
         position: relative;
         flex-shrink: 0;
+        scroll-snap-align: start;
       }
 
       @media (min-width: 768px) {
         .horizontal-section {
-          min-width: calc(100vw - 5rem);
+          width: calc(100vw - 5rem);
           height: 100vh;
-          scroll-snap-align: start;
         }
       }
 
-      /* Advanced Loader Styles */
       .loader-container {
         position: fixed;
         inset: 0;
@@ -170,7 +166,8 @@
     "react/": "https://esm.sh/react@^19.2.3/",
     "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
     "three": "https://esm.sh/three@^0.182.0",
-    "three/": "https://esm.sh/three@^0.182.0/"
+    "three/": "https://esm.sh/three@^0.182.0/",
+    "this/": "https://esm.sh/this@^1.1.0/"
   }
 }
 </script>

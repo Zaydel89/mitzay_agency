@@ -13,10 +13,7 @@ const NeuralNexusSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [infoText, setInfoText] = useState('Shape: Sphere (Click to morph)');
   const [activeScheme, setActiveScheme] = useState('fire');
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // Refs para lógica de Three.js accesible desde React
   const triggerMorphRef = useRef<() => void>(() => {});
   const updateColorsRef = useRef<() => void>(() => {});
 
@@ -75,7 +72,6 @@ const NeuralNexusSection: React.FC = () => {
     const swirlAxis = new THREE.Vector3();
     const currentVec = new THREE.Vector3();
 
-    // Shape Generators
     function generateSphere(count: number, size: number) {
       const points = new Float32Array(count * 3);
       const phi = Math.PI * (Math.sqrt(5) - 1);
@@ -187,40 +183,26 @@ const NeuralNexusSection: React.FC = () => {
     let currentShapeIndex = 0;
 
     const init = () => {
-      let progress = 0;
-      const updateProgress = (inc: number) => {
-        progress += inc;
-        setLoadingProgress(Math.min(100, progress));
-        if (progress >= 100) {
-          setTimeout(() => setIsLoading(false), 500);
-        }
-      };
-
       clock = new THREE.Clock();
       noise3D = createNoise3D();
       noise4D = createNoise4D();
       scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x000308, 0.03);
-      updateProgress(10);
 
       camera = new THREE.PerspectiveCamera(70, containerRef.current!.clientWidth / containerRef.current!.clientHeight, 0.1, 1000);
       camera.position.set(0, 8, 28);
-      updateProgress(10);
 
       renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current!, antialias: true, alpha: true, powerPreference: 'high-performance' });
       renderer.setSize(containerRef.current!.clientWidth, containerRef.current!.clientHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      updateProgress(15);
 
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.3;
       controls.enableZoom = false;
-      updateProgress(10);
 
-      // Starfield
       const createStarTexture = () => {
         const size = 64;
         const canvas = document.createElement('canvas');
@@ -255,16 +237,12 @@ const NeuralNexusSection: React.FC = () => {
         blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, vertexColors: true
       });
       scene.add(new THREE.Points(starGeo, starMat));
-      updateProgress(20);
 
-      // Post Processing
       composer = new EffectComposer(renderer);
       composer.addPass(new RenderPass(scene, camera));
       const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), CONFIG.bloomStrength, CONFIG.bloomRadius, CONFIG.bloomThreshold);
       composer.addPass(bloom);
-      updateProgress(15);
 
-      // Particles System
       targetPositions = SHAPES.map(s => s.generator(CONFIG.particleCount, CONFIG.shapeSize));
       currentPositions = new Float32Array(targetPositions[0]);
       sourcePositions = new Float32Array(targetPositions[0]);
@@ -308,7 +286,6 @@ const NeuralNexusSection: React.FC = () => {
       particleSystem = new THREE.Points(particlesGeometry, particleMat);
       scene.add(particleSystem);
       
-      updateProgress(20);
       animate();
     };
 
@@ -452,12 +429,8 @@ const NeuralNexusSection: React.FC = () => {
     };
   }, []);
 
-  // Sincronización de esquemas de color
   useEffect(() => {
-    // Actualizamos el esquema en la lógica de Three.js indirectamente a través del objeto CONFIG o llamando a la ref
-    const COLOR_SCHEMES_KEYS: any = { fire: 'fire', neon: 'neon', nature: 'nature', rainbow: 'rainbow' };
     (window as any)._currentScheme = activeScheme; 
-    // Debido a cómo se estructuró el código proporcionado, forzamos la actualización de colores
     updateColorsRef.current();
   }, [activeScheme]);
 
@@ -466,15 +439,6 @@ const NeuralNexusSection: React.FC = () => {
       ref={containerRef}
       className="horizontal-section relative overflow-hidden bg-black flex items-center justify-center font-mono"
     >
-      {isLoading && (
-        <div className="fixed inset-0 z-[1000] bg-black flex flex-col items-center justify-center transition-opacity duration-700">
-          <span className="text-2xl tracking-[2px] mb-4">Initializing Particles...</span>
-          <div className="w-60 h-1.5 bg-white/10 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-[#00a2ff] to-[#00ffea] transition-all duration-300" style={{ width: `${loadingProgress}%` }}></div>
-          </div>
-        </div>
-      )}
-
       <div className="absolute top-4 w-full text-center z-50 pointer-events-none">
         <div className="inline-block px-4 py-2 bg-[#191e32]/35 border border-white/10 rounded-xl backdrop-blur-xl shadow-inner shadow-white/5 transition-all text-sm text-[#0080ff] drop-shadow-[0_0_5px_rgba(0,128,255,0.8)]">
           {infoText}
@@ -499,7 +463,6 @@ const NeuralNexusSection: React.FC = () => {
             <div 
               key={scheme.id}
               onClick={() => {
-                // Inyectamos el cambio en el objeto global que la ref puede leer o simplemente actualizamos el estado
                 (window as any)._currentScheme = scheme.id;
                 setActiveScheme(scheme.id);
               }}
