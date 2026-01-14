@@ -19,6 +19,8 @@ import {
   DISCOUNT_CONFIG
 } from './constants';
 
+const N8N_WEBHOOK_URL = "https://n8n-n8n.4mdxie.easypanel.host/webhook/5adc2915-cca2-4864-8e4b-5620275cb293";
+
 const BackgroundVideo: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => (
   <div className={fixed ? "fixed inset-0 z-0" : "absolute inset-0 z-0"}>
     <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70 z-10"></div>
@@ -36,38 +38,123 @@ const BackgroundVideo: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => (
 
 const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  const [formData, setFormData] = useState({
+    fullName: '',
+    whatsapp: '',
+    email: ''
+  });
+
   if (!isOpen) return null;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(DISCOUNT_CONFIG.code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      // Usamos toISOString para que Airtable reconozca la fecha sin problemas de formato regional
+      const payload = {
+        fullName: formData.fullName,
+        whatsapp: formData.whatsapp,
+        email: formData.email,
+        date: new Date().toISOString()
+      };
+
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error();
+      
+      setStep(2);
+    } catch (err) {
+      setError("Error de conexión con el núcleo. Reintenta en unos segundos.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[400] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={onClose}></div>
-      <div className="relative glass w-full max-w-md p-6 sm:p-8 rounded-[2.5rem] border border-primary/20 shadow-primary/20 shadow-2xl animate-scale-up">
-        {step === 1 ? (
-          <form onSubmit={(e) => { e.preventDefault(); setStep(2); }} className="space-y-6">
-            <h3 className="text-xl sm:text-2xl font-black text-center mb-2">ACTIVA TU DESCUENTO</h3>
-            <p className="text-center text-gray-400 text-xs sm:text-sm mb-6">Regístrate para recibir el código del 25% OFF válido hasta el {DISCOUNT_CONFIG.deadline.split(' - ')[0]}.</p>
-            <div className="space-y-4">
-              <input required type="text" placeholder="Nombre completo" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
-              <input required type="email" placeholder="Correo electrónico" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
+      <div className="absolute inset-0 bg-black/95 backdrop-blur-xl" onClick={onClose}></div>
+      <div className="relative glass w-full max-w-lg p-1 rounded-[3rem] border border-primary/40 shadow-[0_0_80px_rgba(0,220,1,0.2)] animate-scale-up overflow-hidden">
+        <div className="bg-black/60 p-8 sm:p-12 rounded-[2.8rem] relative z-10">
+          {step === 1 ? (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/30 rounded-full mb-6">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  </span>
+                  <span className="text-primary text-[9px] font-black tracking-[0.4em] uppercase">Oferta de Lanzamiento</span>
+                </div>
+                <h3 className="text-4xl sm:text-5xl font-black mb-6 leading-[1.1] tracking-tighter text-white">
+                  NO TE QUEDES <br/><span className="text-primary italic">FUERA</span> DEL FUTURO.
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Estás a un paso de desbloquear el <span className="text-white font-bold">25% DE DESCUENTO</span> en todo nuestro ecosistema. Registra tus datos para recibir el acceso VIP y tu código exclusivo.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <input required type="text" placeholder="Nombre completo" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
+                <input required type="tel" placeholder="WhatsApp (Ej: +52...)" value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
+                <input required type="email" placeholder="Correo electrónico" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
+              </div>
+
+              {error && <p className="text-red-500 text-[10px] font-bold text-center uppercase tracking-widest animate-pulse">{error}</p>}
+
+              <button type="submit" disabled={isSubmitting} className="group relative w-full py-5 bg-primary text-black font-black uppercase tracking-[0.3em] text-xs rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50">
+                <span className="relative z-10">{isSubmitting ? 'VERIFICANDO NÚCLEO...' : 'RECLAMAR MI BENEFICIO'}</span>
+              </button>
+              
+              <p className="text-center text-[9px] text-gray-600 uppercase tracking-widest">
+                Protección de datos MitZay v2.5 • Sin Spam
+              </p>
+            </form>
+          ) : (
+            <div className="text-center space-y-10 py-6">
+              <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto border border-primary/40 relative">
+                <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
+                <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <h3 className="text-4xl font-black mb-3">¡BIENVENIDO AL ELITE!</h3>
+                <p className="text-gray-400 text-sm">Tu código ha sido activado y enviado a <span className="text-white">{formData.email}</span>.</p>
+              </div>
+              <div 
+                onClick={handleCopy}
+                className="p-10 bg-primary/5 border-2 border-dashed border-primary/30 rounded-[2.5rem] relative cursor-pointer hover:bg-primary/10 transition-all group"
+              >
+                <p className="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-4">CÓDIGO ACTIVO:</p>
+                <p className="text-5xl sm:text-6xl font-black text-white tracking-widest">{DISCOUNT_CONFIG.code}</p>
+                <div className={`absolute top-4 right-4 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded bg-primary text-black transition-opacity ${copied ? 'opacity-100' : 'opacity-0'}`}>
+                  Copiado
+                </div>
+                <p className="mt-6 text-[9px] text-primary/60 font-black uppercase tracking-widest animate-pulse">Haz clic para copiar código</p>
+              </div>
+              <div className="space-y-4">
+                <p className="text-xs text-gray-500 leading-relaxed italic">
+                  "El éxito no es para quien más trabaja, sino para quien mejor automatiza."
+                </p>
+                <button onClick={onClose} className="text-white/40 font-black uppercase tracking-[0.4em] text-[10px] hover:text-primary transition-colors">Finalizar Registro</button>
+              </div>
             </div>
-            <button type="submit" className="w-full py-5 bg-primary text-black font-black uppercase tracking-widest text-xs rounded-2xl hover:scale-[1.02] transition-transform">
-              RECIBIR CÓDIGO
-            </button>
-          </form>
-        ) : (
-          <div className="text-center space-y-6 py-4">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary/40">
-              <svg className="w-8 h-8 sm:w-10 sm:h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black">¡ACTIVADO!</h3>
-            <div className="p-6 bg-primary/10 border border-primary/30 rounded-2xl">
-              <p className="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-2">Tu código es:</p>
-              <p className="text-3xl sm:text-4xl font-black text-white tracking-widest">{DISCOUNT_CONFIG.code}</p>
-            </div>
-            <p className="text-[10px] sm:text-xs text-gray-400">Úsalo en tu próxima cotización antes del cierre de Enero.</p>
-            <button onClick={onClose} className="text-primary font-black uppercase tracking-widest text-[10px] hover:underline">Cerrar</button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
@@ -284,7 +371,6 @@ const App: React.FC = () => {
               <div className="horizontal-section flex flex-col items-center justify-center relative px-6">
                 <BackgroundVideo />
                 <Hero onScrollToAgenda={() => scrollToSection(4)} />
-                <DiscountCTA onClick={() => setIsDiscountOpen(true)} className="sm:absolute sm:bottom-20 z-30" />
               </div>
 
               {/* SECTION 1: ECOSISTEMA */}
