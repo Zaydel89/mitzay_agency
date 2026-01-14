@@ -36,7 +36,7 @@ const BackgroundVideo: React.FC<{ fixed?: boolean }> = ({ fixed = false }) => (
   </div>
 );
 
-const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void; onScheduleClick: () => void }> = ({ isOpen, onClose, onScheduleClick }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -62,11 +62,11 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
     setError(null);
 
     try {
+      // Se eliminó el campo 'date' para evitar el error 422 de Airtable (computed fields)
       const payload = {
         fullname: formData.fullName.trim(),
         whatsapp: formData.whatsapp.trim(),
-        email: formData.email.trim().toLowerCase(),
-        date: new Date().toISOString()
+        email: formData.email.trim().toLowerCase()
       };
 
       const response = await fetch(N8N_WEBHOOK_URL, {
@@ -75,11 +75,14 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Fallo en el servidor");
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Error en el servidor de automatización");
+      }
       
       setStep(2);
     } catch (err: any) {
-      setError("Error de sincronización. Reintenta en unos segundos.");
+      setError("Error de sincronización. Verifica tu conexión e intenta de nuevo.");
     } finally {
       setIsSubmitting(false);
     }
@@ -111,7 +114,11 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                 <input required type="email" placeholder="Correo corporativo" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary transition-all text-sm" />
               </div>
 
-              {error && <p className="text-red-500 text-[10px] font-bold text-center uppercase tracking-widest">{error}</p>}
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl">
+                  <p className="text-red-500 text-[10px] font-bold text-center uppercase tracking-widest leading-tight">{error}</p>
+                </div>
+              )}
 
               <button type="submit" disabled={isSubmitting} className="group relative w-full py-5 bg-primary text-black font-black uppercase tracking-[0.3em] text-xs rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50">
                 <span className="relative z-10">{isSubmitting ? 'SINCRONIZANDO...' : 'RECLAMAR CÓDIGO VIP'}</span>
@@ -139,9 +146,12 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                 <p className="text-xs text-gray-400 leading-relaxed italic">
                   "El futuro pertenece a quienes automatizan hoy."
                 </p>
-                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className="block w-full py-4 glass border border-primary/20 text-primary font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all">
+                <button 
+                  onClick={onScheduleClick} 
+                  className="w-full py-4 glass border border-primary/20 text-primary font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all"
+                >
                   AGENDAR CONSULTA ESTRATÉGICA
-                </a>
+                </button>
               </div>
             </div>
           )}
@@ -428,7 +438,14 @@ const App: React.FC = () => {
       </main>
 
       <VideoModal url={modalVideo.url} isOpen={modalVideo.isOpen} onClose={() => setModalVideo({url:'', isOpen:false})} />
-      <RegistrationModal isOpen={isDiscountOpen} onClose={() => setIsDiscountOpen(false)} />
+      <RegistrationModal 
+        isOpen={isDiscountOpen} 
+        onClose={() => setIsDiscountOpen(false)} 
+        onScheduleClick={() => {
+          setIsDiscountOpen(false);
+          navigateToAgenda();
+        }}
+      />
       <WhatsAppButton />
     </div>
   );
