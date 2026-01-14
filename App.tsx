@@ -441,13 +441,12 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* SECTION 4: AGENDA - Optimized for smaller screens and reduced headline */}
+              {/* SECTION 4: AGENDA - Black Calendar with Green Neon Outline */}
               <div className="horizontal-section flex items-start sm:items-center px-6 sm:px-10 md:px-20 relative overflow-y-auto no-scrollbar">
                 <BackgroundVideo />
-                <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-20 items-center relative z-20 pt-20 pb-20 sm:pt-0 sm:pb-0">
+                <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-20 items-start sm:items-center relative z-20 pt-20 pb-20 sm:pt-0 sm:pb-0">
                   <AnimatedSection isActive={activeSection === 4} triggerOnSectionActive className="text-center sm:text-left">
                     <h2 className="text-primary text-[8px] sm:text-[10px] font-black tracking-[0.5em] uppercase mb-4">Let's talk</h2>
-                    {/* Size reduced by ~25%: text-2xl -> 3xl -> 4xl -> 5xl instead of 3xl -> 5xl -> 6xl */}
                     <h3 className="text-2xl sm:text-4xl md:text-5xl font-poppins font-bold leading-tight mb-6 sm:mb-8">{CALENDLY_SECTION.headline}</h3>
                     <p className="text-gray-400 text-sm sm:text-lg mb-8 max-w-md mx-auto sm:mx-0">{CALENDLY_SECTION.copy}</p>
                     <div className="flex flex-col gap-6 items-center sm:items-start">
@@ -458,9 +457,17 @@ const App: React.FC = () => {
                       <DiscountCTA onClick={() => setIsDiscountOpen(true)} className="mt-2" />
                     </div>
                   </AnimatedSection>
-                  <AnimatedSection delay={0.2} isActive={activeSection === 4} triggerOnSectionActive className="h-[500px] sm:h-[600px]">
-                    <div className="w-full h-full glass rounded-[2.5rem] border border-white/5 overflow-hidden relative shadow-2xl">
-                       <iframe src={CALENDLY_URL} className="w-full h-full relative z-10 border-0 invert-[0.92] hue-rotate-[145deg] brightness-90 saturate-50" scrolling="no"></iframe>
+                  
+                  {/* Calendar container with increased height and Neon Green Glow */}
+                  <AnimatedSection delay={0.2} isActive={activeSection === 4} triggerOnSectionActive className="h-[700px] sm:h-[850px] w-full">
+                    <div className="w-full h-full rounded-[2.5rem] border-2 border-primary/40 overflow-hidden relative shadow-[0_0_50px_rgba(0,220,1,0.15)] bg-black group transition-all duration-500 hover:border-primary hover:shadow-[0_0_60px_rgba(0,220,1,0.25)]">
+                       <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent pointer-events-none z-0"></div>
+                       <iframe 
+                        src={CALENDLY_URL} 
+                        className="w-full h-full relative z-10 border-0 invert-[0.88] hue-rotate-[140deg] brightness-[0.9] saturate-[0.8] contrast-[1.1]" 
+                        title="Agenda MitZay"
+                        loading="lazy"
+                       ></iframe>
                     </div>
                   </AnimatedSection>
                 </div>
