@@ -138,7 +138,7 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
             <div className="text-center space-y-10 py-4">
               <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto border border-primary/30 relative">
                 <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
-                <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"/></svg>
+                <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <div>
                 <h3 className="text-4xl font-poppins font-bold mb-3 tracking-tight text-white">¡ACCIÓN CONFIRMADA!</h3>
@@ -551,7 +551,7 @@ const App: React.FC = () => {
         {currentPage === 'services' && (
           <div className="h-screen overflow-y-auto no-scrollbar relative">
             <BackgroundVideo fixed />
-            <div className="relative z-20 py-32 px-10 max-w-6xl mx-auto text-center sm:text-left">
+            <div className="relative z-20 pt-52 pb-32 px-6 sm:px-10 max-w-6xl mx-auto text-center sm:text-left">
               <h1 className="text-5xl sm:text-8xl font-poppins font-semibold text-white mb-8 tracking-tight leading-none">{SERVICES_PAGE_CONTENT.title}</h1>
               <p className="text-xl text-gray-400 max-w-3xl mb-12 font-light">{SERVICES_PAGE_CONTENT.intro}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-32">
