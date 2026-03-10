@@ -106,8 +106,8 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                   <span className="text-primary text-[10px] font-black tracking-[0.4em] uppercase">REGALO DE BIENVENIDA VIP</span>
                 </div>
-                <h3 className="text-4xl sm:text-5xl font-poppins font-bold mb-6 leading-[1] tracking-tightest text-white">
-                  DOMINA LA<br/><span className="text-primary italic">ERA DE LA IA</span>.
+                <h3 className="text-3xl sm:text-4xl font-poppins font-bold mb-6 leading-[1] tracking-tightest text-white">
+                  DOMINA LA ERA DE LA<br/><span className="text-primary italic">INTELIGENCIA ARTIFICIAL</span>.
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto font-light mb-4">
                   Desbloquea tu <span className="text-white font-bold">BONO DEL 25%</span> y escala tu negocio con el ecosistema MitZay. 
@@ -120,9 +120,9 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               </div>
 
               <div className="space-y-4">
-                <input required type="text" placeholder="Tu nombre profesional" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
+                <input required type="text" placeholder="Nombre Completo" value={formData.fullName} onChange={e => setFormData({...formData, fullName: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
                 <input required type="tel" placeholder="WhatsApp (Ej: +52...)" value={formData.whatsapp} onChange={e => setFormData({...formData, whatsapp: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
-                <input required type="email" placeholder="Email corporativo" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
+                <input required type="email" placeholder="Email Activo" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
               </div>
 
               {error && <p className="text-red-500 text-[10px] font-bold text-center uppercase tracking-widest">{error}</p>}
@@ -166,6 +166,47 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               </div>
             </div>
           )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AgendaFullModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  const handleWhatsAppRedirect = () => {
+    const message = encodeURIComponent(`Hola! Vi que su agenda de videollamadas está llena. Me gustaría realizar una consulta personal.`);
+    window.open(`https://wa.me/5215536317581?text=${message}`, '_blank');
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-[600] flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/90 backdrop-blur-xl animate-fade-in" onClick={onClose}></div>
+      <div className="relative glass w-full max-w-md p-[1px] rounded-[3rem] bg-gradient-to-br from-primary/40 to-transparent shadow-[0_0_80px_rgba(0,220,1,0.2)] animate-scale-up overflow-hidden">
+        <div className="bg-[#050505] p-10 rounded-[2.9rem] relative z-10 text-center">
+          <button onClick={onClose} className="absolute top-6 right-6 text-white/20 hover:text-primary transition-colors p-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+
+          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-primary/20">
+            <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+
+          <h3 className="text-3xl font-poppins font-bold mb-4 text-white">AGENDA COMPLETA</h3>
+          <p className="text-gray-400 text-sm leading-relaxed mb-8 font-light">
+            De momento nuestra agenda de videollamadas está <span className="text-white font-bold">llena para todo el mes</span>. 
+            Sin embargo, estamos atendiendo consultas personales vía WhatsApp de forma inmediata.
+          </p>
+
+          <button 
+            onClick={handleWhatsAppRedirect} 
+            className="w-full py-5 bg-primary text-black font-black rounded-2xl text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-4"
+          >
+            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.101-.177.211-.077.383.1.173.444.73.954 1.185.657.587 1.21.768 1.383.853.173.085.274.072.376-.045.101-.116.434-.506.549-.68.116-.173.231-.144.39-.087.158.058 1.012.477 1.185.564.173.085.289.129.332.202.043.073.043.419-.101.824z" /></svg>
+            CONSULTA POR WHATSAPP
+          </button>
         </div>
       </div>
     </div>
@@ -345,7 +386,9 @@ const App: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [modalVideo, setModalVideo] = useState<{ url: string; isOpen: boolean }>({ url: '', isOpen: false });
   const [isDiscountOpen, setIsDiscountOpen] = useState(false);
+  const [isAgendaFullOpen, setIsAgendaFullOpen] = useState(false);
   const [hasShownAutoPopup, setHasShownAutoPopup] = useState(false);
+  const [hasShownAgendaFullPopup, setHasShownAgendaFullPopup] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -363,6 +406,14 @@ const App: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [isLoading, hasShownAutoPopup]);
+
+  // Trigger para el popup de agenda llena al llegar a la sección 4
+  useEffect(() => {
+    if (currentPage === 'home' && activeSection === 4 && !hasShownAgendaFullPopup) {
+      setIsAgendaFullOpen(true);
+      setHasShownAgendaFullPopup(true);
+    }
+  }, [currentPage, activeSection, hasShownAgendaFullPopup]);
 
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
@@ -404,7 +455,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-primary selection:text-black overflow-x-hidden">
+    <div className="bg-black h-screen text-white font-sans selection:bg-primary selection:text-black overflow-hidden">
       {isLoading && <LoadingScreen />}
       <Navbar currentPage={currentPage === 'portfolio-catalog' ? 'home' : currentPage} onNavigate={setCurrentPage} onScrollToSection={scrollToSection} />
 
@@ -517,7 +568,7 @@ const App: React.FC = () => {
         )}
 
         {currentPage === 'portfolio-catalog' && (
-          <div className="h-full bg-black relative overflow-y-auto no-scrollbar scroll-smooth">
+          <div className="h-screen bg-black relative overflow-y-auto no-scrollbar scroll-smooth">
             <BackgroundVideo fixed />
             <div className="relative z-20 max-w-7xl mx-auto px-6 py-32 sm:py-48">
               <button 
@@ -586,6 +637,10 @@ const App: React.FC = () => {
       <RegistrationModal 
         isOpen={isDiscountOpen} 
         onClose={() => setIsDiscountOpen(false)} 
+      />
+      <AgendaFullModal 
+        isOpen={isAgendaFullOpen} 
+        onClose={() => setIsAgendaFullOpen(false)} 
       />
       <PromoBadge onClick={() => setIsDiscountOpen(true)} />
       <WhatsAppButton />
