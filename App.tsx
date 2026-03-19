@@ -470,14 +470,14 @@ const App: React.FC = () => {
 
               <div className="horizontal-section flex items-center px-6 sm:px-10 md:px-20 relative">
                 <BackgroundVideo />
-                <div className="w-full max-w-7xl mx-auto relative z-20 py-10 sm:py-0">
+                <div className="w-full max-w-7xl mx-auto relative z-20 py-10 sm:py-0 [zoom:0.7] md:[zoom:1]">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12">
                     <div>
                       <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4">Capacidades</h2>
                       <h3 className="text-3xl sm:text-5xl font-poppins font-bold leading-tight">Nuestro Ecosistema</h3>
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     {SERVICES_OVERVIEW.map((s, i) => (
                       <ServiceCard key={s.id} service={s} index={i} activeSection={activeSection} onPlay={setModalVideo} />
                     ))}
@@ -487,7 +487,7 @@ const App: React.FC = () => {
 
               <div className="horizontal-section flex items-center px-6 sm:px-10 md:px-20 relative">
                 <BackgroundVideo />
-                <div className="w-full max-w-[90rem] mx-auto relative z-20">
+                <div className="w-full max-w-[90rem] mx-auto relative z-20 [zoom:0.7] md:[zoom:1]">
                   <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-6">
                     <div>
                       <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4 text-center sm:text-left">Muestra</h2>
@@ -500,7 +500,7 @@ const App: React.FC = () => {
                       Explorar Catálogo Élite
                     </button>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     {PORTFOLIO_ITEMS.map((item, i) => (
                       <PortfolioCard key={i} item={item} index={i} activeSection={activeSection} onPlay={url => setModalVideo({url, isOpen:true})} />
                     ))}
