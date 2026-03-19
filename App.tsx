@@ -104,7 +104,7 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
               <div className="text-center">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full mb-8">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                  <span className="text-primary text-[10px] font-black tracking-[0.4em] uppercase">REGALO DE BIENVENIDA VIP</span>
+                  <span className="text-primary text-[0.625rem] font-black tracking-[0.4em] uppercase">REGALO DE BIENVENIDA VIP</span>
                 </div>
                 <h3 className="text-3xl sm:text-4xl font-poppins font-bold mb-6 leading-[1] tracking-tightest text-white">
                   DOMINA LA ERA DE LA<br/><span className="text-primary italic">INTELIGENCIA ARTIFICIAL</span>.
@@ -112,7 +112,7 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                 <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto font-light mb-4">
                   Desbloquea tu <span className="text-white font-bold">BONO DEL 25%</span> y escala tu negocio con el ecosistema MitZay. 
                 </p>
-                <div className="flex items-center justify-center gap-4 text-[9px] font-black text-primary/60 uppercase tracking-widest">
+                <div className="flex items-center justify-center gap-4 text-[0.5625rem] font-black text-primary/60 uppercase tracking-widest">
                   <span className="flex items-center gap-1"><svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg> VERIFICADO</span>
                   <span className="text-white/40">•</span>
                   <span>ÚLTIMOS 7 CUPOS HOY</span>
@@ -125,14 +125,14 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                 <input required type="email" placeholder="Email Activo" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-primary/50 transition-all text-sm text-white placeholder:text-gray-600" />
               </div>
 
-              {error && <p className="text-red-500 text-[10px] font-bold text-center uppercase tracking-widest">{error}</p>}
+              {error && <p className="text-red-500 text-[0.625rem] font-bold text-center uppercase tracking-widest">{error}</p>}
 
-              <button type="submit" disabled={isSubmitting} className="group relative w-full py-5 bg-primary text-black font-black uppercase tracking-[0.3em] text-[10px] rounded-2xl shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 overflow-hidden">
+              <button type="submit" disabled={isSubmitting} className="group relative w-full py-5 bg-primary text-black font-black uppercase tracking-[0.3em] text-[0.625rem] rounded-2xl shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 overflow-hidden">
                 <div className="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
                 <span className="relative z-10">{isSubmitting ? 'GENERANDO CÓDIGO ÉLITE...' : 'OBTENER MI ACCESO VIP'}</span>
               </button>
               
-              <p className="text-[9px] text-gray-600 text-center uppercase tracking-[0.2em]">Acceso instantáneo al ecosistema MitZay v2.5</p>
+              <p className="text-[0.5625rem] text-gray-600 text-center uppercase tracking-[0.2em]">Acceso instantáneo al ecosistema MitZay v2.5</p>
             </form>
           ) : (
             <div className="text-center space-y-10 py-4">
@@ -148,17 +148,17 @@ const RegistrationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
                 onClick={handleCopy}
                 className="p-10 bg-primary/5 border-2 border-dashed border-primary/30 rounded-[2.5rem] relative cursor-pointer hover:bg-primary/10 transition-all group"
               >
-                <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-4">CÓDIGO DE DESCUENTO:</p>
+                <p className="text-[0.625rem] font-black text-primary uppercase tracking-[0.4em] mb-4">CÓDIGO DE DESCUENTO:</p>
                 <p className="text-5xl sm:text-6xl font-poppins font-black text-white tracking-[0.1em]">{DISCOUNT_CONFIG.code}</p>
-                <div className={`absolute -top-4 left-1/2 -translate-x-1/2 text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-primary text-black transition-opacity ${copied ? 'opacity-100' : 'opacity-0'}`}>¡COPIADO CON ÉXITO!</div>
+                <div className={`absolute -top-4 left-1/2 -translate-x-1/2 text-[0.5rem] font-black uppercase tracking-widest px-3 py-1 rounded-full bg-primary text-black transition-opacity ${copied ? 'opacity-100' : 'opacity-0'}`}>¡COPIADO CON ÉXITO!</div>
               </div>
               <div className="space-y-6">
-                <p className="text-[10px] text-gray-500 leading-relaxed italic uppercase tracking-widest">
+                <p className="text-[0.625rem] text-gray-500 leading-relaxed italic uppercase tracking-widest">
                   "El futuro no se espera, se automatiza."
                 </p>
                 <button 
                   onClick={handleWhatsAppRedirect} 
-                  className="w-full py-5 bg-primary text-black font-black rounded-2xl text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-4"
+                  className="w-full py-5 bg-primary text-black font-black rounded-2xl text-[0.625rem] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-4"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.101-.177.211-.077.383.1.173.444.73.954 1.185.657.587 1.21.768 1.383.853.173.085.274.072.376-.045.101-.116.434-.506.549-.68.116-.173.231-.144.39-.087.158.058 1.012.477 1.185.564.173.085.289.129.332.202.043.073.043.419-.101.824z" /></svg>
                   VALIDAR BENEFICIO POR WHATSAPP
@@ -202,7 +202,7 @@ const AgendaFullModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
 
           <button 
             onClick={handleWhatsAppRedirect} 
-            className="w-full py-5 bg-primary text-black font-black rounded-2xl text-[10px] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-4"
+            className="w-full py-5 bg-primary text-black font-black rounded-2xl text-[0.625rem] uppercase tracking-[0.2em] shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-4"
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.101-.177.211-.077.383.1.173.444.73.954 1.185.657.587 1.21.768 1.383.853.173.085.274.072.376-.045.101-.116.434-.506.549-.68.116-.173.231-.144.39-.087.158.058 1.012.477 1.185.564.173.085.289.129.332.202.043.073.043.419-.101.824z" /></svg>
             CONSULTA POR WHATSAPP
@@ -219,8 +219,8 @@ const PromoBadge: React.FC<{ onClick: () => void }> = ({ onClick }) => (
     className="fixed bottom-32 right-8 z-[200] w-16 h-16 glass border border-primary/40 rounded-full flex flex-col items-center justify-center shadow-2xl hover:scale-110 transition-transform group overflow-hidden"
   >
     <div className="absolute inset-0 bg-primary/10 animate-pulse"></div>
-    <span className="text-primary font-black text-[10px] leading-none mb-1 group-hover:animate-bounce">25%</span>
-    <span className="text-[7px] text-white/60 font-black uppercase tracking-tighter">OFF</span>
+    <span className="text-primary font-black text-[0.625rem] leading-none mb-1 group-hover:animate-bounce">25%</span>
+    <span className="text-[0.4375rem] text-white/60 font-black uppercase tracking-tighter">OFF</span>
     <div className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full animate-ping opacity-30"></div>
   </button>
 );
@@ -230,11 +230,11 @@ const DiscountCTA: React.FC<{ onClick: () => void; className?: string }> = ({ on
     <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
       <div className="flex items-center gap-2 mb-1">
         <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-        <span className="text-primary font-black text-[9px] sm:text-[10px] uppercase tracking-[0.3em]">PROMO ACTIVA</span>
+        <span className="text-primary font-black text-[0.5625rem] sm:text-[0.625rem] uppercase tracking-[0.3em]">PROMO ACTIVA</span>
       </div>
-      <p className="text-white font-bold text-[10px] sm:text-xs">25% OFF PARA NUEVOS SOCIOS</p>
+      <p className="text-white font-bold text-[0.625rem] sm:text-xs">25% OFF PARA NUEVOS SOCIOS</p>
     </div>
-    <button onClick={onClick} className="px-6 sm:px-8 py-3 sm:py-4 glass border border-primary/50 text-primary font-black rounded-2xl text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all group overflow-hidden relative">
+    <button onClick={onClick} className="px-6 sm:px-8 py-3 sm:py-4 glass border border-primary/50 text-primary font-black rounded-2xl text-[0.5625rem] sm:text-[0.625rem] uppercase tracking-widest hover:bg-primary hover:text-black transition-all group overflow-hidden relative">
       <span className="relative z-10">OBTENER CÓDIGO</span>
       <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-0"></div>
     </button>
@@ -304,7 +304,7 @@ const PortfolioCard: React.FC<{ item: PortfolioItem; index: number; activeSectio
         </div>
       </div>
       <h4 className="text-xl font-bold mb-2 text-white group-hover:text-primary transition-colors">{item.title}</h4>
-      <p className="text-[11px] text-gray-400 leading-relaxed line-clamp-4">{item.description}</p>
+      <p className="text-[0.6875rem] text-gray-400 leading-relaxed line-clamp-4">{item.description}</p>
     </div>
   </AnimatedSection>
 );
@@ -319,7 +319,7 @@ const BrowserPreview: React.FC<{ url: string; title: string }> = ({ url, title }
         <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
       </div>
       <div className="flex-1 bg-black/40 rounded-lg px-4 py-1 flex items-center justify-between">
-        <span className="text-[9px] text-gray-400 font-mono tracking-tighter truncate">{url}</span>
+        <span className="text-[0.5625rem] text-gray-400 font-mono tracking-tighter truncate">{url}</span>
         <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </div>
     </div>
@@ -334,7 +334,7 @@ const BrowserPreview: React.FC<{ url: string; title: string }> = ({ url, title }
           <div className="w-16 h-16 glass border border-primary/40 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
             <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </div>
-          <p className="text-[10px] font-black tracking-widest text-primary uppercase">Live Architecture</p>
+          <p className="text-[0.625rem] font-black tracking-widest text-primary uppercase">Live Architecture</p>
         </div>
       </div>
       <a href={url} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10"></a>
@@ -349,27 +349,27 @@ const ProjectCatalogCard: React.FC<{ project: DetailedPortfolioProject }> = ({ p
         <BrowserPreview url={project.url} title={project.title} />
       </div>
       <div className="p-8 sm:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-black/80 to-black/20">
-        <span className="text-primary font-black text-[10px] uppercase tracking-[0.5em] mb-4">{project.tagline}</span>
+        <span className="text-primary font-black text-[0.625rem] uppercase tracking-[0.5em] mb-4">{project.tagline}</span>
         <h3 className="text-4xl sm:text-5xl font-poppins font-bold mb-8 group-hover:text-primary transition-colors tracking-tight">{project.title}</h3>
         <p className="text-gray-300 text-lg mb-10 leading-relaxed italic border-l-2 border-primary/30 pl-6 font-light">"{project.description}"</p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           <div>
-            <h5 className="text-[10px] font-black uppercase text-white tracking-widest mb-3 opacity-60">Ingeniería & Layout</h5>
+            <h5 className="text-[0.625rem] font-black uppercase text-white tracking-widest mb-3 opacity-60">Ingeniería & Layout</h5>
             <p className="text-gray-400 text-xs leading-relaxed font-light">{project.techFocus.layout}</p>
           </div>
           <div>
-            <h5 className="text-[10px] font-black uppercase text-white tracking-widest mb-3 opacity-60">Interacción & UI</h5>
+            <h5 className="text-[0.625rem] font-black uppercase text-white tracking-widest mb-3 opacity-60">Interacción & UI</h5>
             <p className="text-gray-400 text-xs leading-relaxed font-light">{project.techFocus.effects}</p>
           </div>
           <div className="sm:col-span-2">
-            <h5 className="text-[10px] font-black uppercase text-white tracking-widest mb-3 opacity-60">Rendimiento & Conversión</h5>
+            <h5 className="text-[0.625rem] font-black uppercase text-white tracking-widest mb-3 opacity-60">Rendimiento & Conversión</h5>
             <p className="text-gray-400 text-xs leading-relaxed font-light">{project.techFocus.performance}</p>
           </div>
         </div>
         
         <div className="mt-14 flex items-center gap-6">
-          <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-5 text-primary font-bold uppercase text-[10px] tracking-[0.3em] group/link hover:gap-7 transition-all px-8 py-5 glass border border-primary/20 rounded-2xl hover:bg-primary/10">
+          <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-5 text-primary font-bold uppercase text-[0.625rem] tracking-[0.3em] group/link hover:gap-7 transition-all px-8 py-5 glass border border-primary/20 rounded-2xl hover:bg-primary/10">
             VISITAR ECOSISTEMA
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>
@@ -473,7 +473,7 @@ const App: React.FC = () => {
                 <div className="w-full max-w-7xl mx-auto relative z-20 py-10 sm:py-0">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12">
                     <div>
-                      <h2 className="text-primary text-[10px] font-black tracking-[0.5em] uppercase mb-4">Capacidades</h2>
+                      <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4">Capacidades</h2>
                       <h3 className="text-3xl sm:text-5xl font-poppins font-bold leading-tight">Nuestro Ecosistema</h3>
                     </div>
                   </div>
@@ -490,12 +490,12 @@ const App: React.FC = () => {
                 <div className="w-full max-w-[90rem] mx-auto relative z-20">
                   <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-6">
                     <div>
-                      <h2 className="text-primary text-[10px] font-black tracking-[0.5em] uppercase mb-4 text-center sm:text-left">Muestra</h2>
+                      <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4 text-center sm:text-left">Muestra</h2>
                       <h3 className="text-3xl sm:text-5xl font-poppins font-bold text-center sm:text-left">Portafolio</h3>
                     </div>
                     <button 
                       onClick={() => setCurrentPage('portfolio-catalog')}
-                      className="px-8 py-4 glass border border-primary/40 text-primary font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all group"
+                      className="px-8 py-4 glass border border-primary/40 text-primary font-black rounded-2xl text-[0.625rem] uppercase tracking-widest hover:bg-primary hover:text-black transition-all group"
                     >
                       Explorar Catálogo Élite
                     </button>
@@ -524,7 +524,7 @@ const App: React.FC = () => {
                             </div>
                           </div>
                           <p className="text-gray-300 text-xs italic flex-1">"{t.quote}"</p>
-                          <span className="text-[10px] font-black text-primary uppercase mt-4">{t.highlight}</span>
+                          <span className="text-[0.625rem] font-black text-primary uppercase mt-4">{t.highlight}</span>
                         </div>
                       </AnimatedSection>
                     ))}
@@ -536,7 +536,7 @@ const App: React.FC = () => {
                 <BackgroundVideo />
                 <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-20">
                   <AnimatedSection isActive={activeSection === 4} triggerOnSectionActive>
-                    <h2 className="text-primary text-[10px] font-black tracking-[0.5em] uppercase mb-4">Let's talk</h2>
+                    <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4">Let's talk</h2>
                     <h3 className="text-3xl sm:text-5xl font-poppins font-bold mb-8">{CALENDLY_SECTION.headline}</h3>
                     <p className="text-gray-400 text-lg mb-8 max-w-md">{CALENDLY_SECTION.copy}</p>
                     <div className="flex flex-col gap-6 items-start">
@@ -544,7 +544,7 @@ const App: React.FC = () => {
                       <DiscountCTA onClick={() => setIsDiscountOpen(true)} />
                     </div>
                   </AnimatedSection>
-                  <AnimatedSection delay={0.2} isActive={activeSection === 4} triggerOnSectionActive className="h-[700px] w-full">
+                  <AnimatedSection delay={0.2} isActive={activeSection === 4} triggerOnSectionActive className="h-[43.75rem] w-full">
                     <div className="w-full h-full rounded-[2.5rem] border-2 border-primary/40 overflow-hidden relative shadow-[0_0_50px_rgba(0,220,1,0.15)] bg-black">
                        <iframe src={CALENDLY_URL} title="Calendly" className="w-full h-full border-0 invert-[0.88] hue-rotate-[140deg] brightness-[0.9] contrast-[1.1]"></iframe>
                     </div>
@@ -573,14 +573,14 @@ const App: React.FC = () => {
             <div className="relative z-20 max-w-7xl mx-auto px-6 py-32 sm:py-48">
               <button 
                 onClick={() => setCurrentPage('home')}
-                className="fixed top-8 left-8 sm:left-28 z-[150] flex items-center gap-4 text-primary font-black uppercase text-[10px] tracking-widest glass px-6 py-3 rounded-full border border-primary/30 hover:bg-primary hover:text-black transition-all"
+                className="fixed top-8 left-8 sm:left-28 z-[150] flex items-center gap-4 text-primary font-black uppercase text-[0.625rem] tracking-widest glass px-6 py-3 rounded-full border border-primary/30 hover:bg-primary hover:text-black transition-all"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 VOLVER AL INICIO
               </button>
               
               <div className="text-center mb-40">
-                <h2 className="text-primary text-[11px] font-black tracking-[0.8em] uppercase mb-10 opacity-60">Selection of Works</h2>
+                <h2 className="text-primary text-[0.6875rem] font-black tracking-[0.8em] uppercase mb-10 opacity-60">Selection of Works</h2>
                 <h1 className="text-7xl sm:text-9xl font-inter font-extralight tracking-tightest leading-[0.9] mb-14 uppercase">
                   MI<br/><span className="text-primary font-light tracking-tighter">PORTAFOLIO</span>
                 </h1>
@@ -610,7 +610,7 @@ const App: React.FC = () => {
                   <div key={i} className="glass p-10 rounded-[3rem] border border-white/5 group hover:border-primary/40 transition-all flex flex-col text-white">
                     <h3 className="text-3xl font-poppins font-bold mb-6 group-hover:text-primary transition-colors">{s.title}</h3>
                     <p className="text-gray-400 text-sm mb-8 leading-relaxed flex-1">{s.objective}</p>
-                    <button onClick={navigateToAgenda} className="w-full py-4 glass border border-primary/20 text-primary font-black rounded-2xl text-[10px] uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Me interesa</button>
+                    <button onClick={navigateToAgenda} className="w-full py-4 glass border border-primary/20 text-primary font-black rounded-2xl text-[0.625rem] uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Me interesa</button>
                   </div>
                 ))}
               </div>

@@ -39,12 +39,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onScrollToSect
                   className={`flex items-center gap-5 px-3 py-3 rounded-xl transition-all duration-300 ${currentPage === link.page ? 'bg-primary/10 text-primary border border-primary/20' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
                 >
                   <div className="w-2 h-2 rounded-full bg-current"></div>
-                  <span className="text-[10px] font-black tracking-widest uppercase opacity-0 group-hover/sidebar:opacity-100 transition-opacity">{link.label}</span>
+                  <span className="text-[0.625rem] font-black tracking-widest uppercase opacity-0 group-hover/sidebar:opacity-100 transition-opacity">{link.label}</span>
                 </button>
                 {link.page === 'home' && isHovered && (
                   <div className="ml-9 mt-2 flex flex-col gap-1">
                     {HOME_SECTIONS.map((sec) => (
-                      <button key={sec.index} onClick={() => onScrollToSection?.(sec.index)} className="text-left text-[8px] font-bold text-gray-500 hover:text-primary py-1 uppercase tracking-widest whitespace-nowrap transition-colors">• {sec.label}</button>
+                      <button key={sec.index} onClick={() => onScrollToSection?.(sec.index)} className="text-left text-[0.5rem] font-bold text-gray-500 hover:text-primary py-1 uppercase tracking-widest whitespace-nowrap transition-colors">• {sec.label}</button>
                     ))}
                   </div>
                 )}
@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onScrollToSect
             className={`flex flex-col items-center justify-center flex-1 h-full gap-1.5 transition-all ${currentPage === link.page ? 'text-primary' : 'text-gray-500'}`}
           >
             <div className={`w-1.5 h-1.5 rounded-full ${currentPage === link.page ? 'bg-primary' : 'bg-transparent'} transition-all`}></div>
-            <span className="text-[7px] font-black tracking-[0.2em] uppercase text-center">{link.label}</span>
+            <span className="text-[0.4375rem] font-black tracking-[0.2em] uppercase text-center">{link.label}</span>
           </button>
         ))}
       </nav>

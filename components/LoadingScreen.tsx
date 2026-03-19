@@ -15,10 +15,10 @@ const LoadingScreen: React.FC = () => {
           className="w-10 h-10 object-contain mb-4 opacity-50 grayscale brightness-200"
           alt="MitZay Logo"
         />
-        <div className="text-primary font-black uppercase tracking-[0.5em] text-[10px] animate-pulse">
+        <div className="text-primary font-black uppercase tracking-[0.5em] text-[0.625rem] animate-pulse">
           Sincronizando Núcleo MitZay
         </div>
-        <div className="mt-2 text-white/20 text-[8px] font-bold uppercase tracking-[0.2em]">
+        <div className="mt-2 text-white/20 text-[0.5rem] font-bold uppercase tracking-[0.2em]">
           Ecosistema Digital IA v2.5
         </div>
       </div>

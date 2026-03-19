@@ -34,12 +34,12 @@ const ChatBot: React.FC = () => {
   return (
     <div className="fixed bottom-8 right-28 z-[200]">
       {isOpen && (
-        <div className="mb-4 w-96 h-[500px] glass border border-primary/20 rounded-3xl flex flex-col shadow-3xl overflow-hidden animate-fade-in origin-bottom-right">
+        <div className="mb-4 w-96 h-[31.25rem] glass border border-primary/20 rounded-3xl flex flex-col shadow-3xl overflow-hidden animate-fade-in origin-bottom-right">
           <div className="p-4 border-b border-white/10 bg-primary/5 flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-black font-black text-[10px]">IA</div>
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-black font-black text-[0.625rem]">IA</div>
             <div>
               <p className="text-xs font-black uppercase tracking-widest">MitZay Assistant</p>
-              <p className="text-[8px] text-primary font-bold uppercase tracking-tighter">Powered by Gemini 3</p>
+              <p className="text-[0.5rem] text-primary font-bold uppercase tracking-tighter">Powered by Gemini 3</p>
             </div>
           </div>
           
@@ -51,7 +51,7 @@ const ChatBot: React.FC = () => {
             )}
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-3 rounded-2xl text-[11px] leading-relaxed ${m.role === 'user' ? 'bg-primary text-black font-medium' : 'glass border border-white/10 text-gray-200'}`}>
+                <div className={`max-w-[80%] p-3 rounded-2xl text-[0.6875rem] leading-relaxed ${m.role === 'user' ? 'bg-primary text-black font-medium' : 'glass border border-white/10 text-gray-200'}`}>
                   {m.content}
                 </div>
               </div>
