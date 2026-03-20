@@ -470,14 +470,14 @@ const App: React.FC = () => {
 
               <div className="horizontal-section flex items-center px-6 sm:px-10 md:px-20 relative">
                 <BackgroundVideo />
-                <div className="w-full max-w-7xl mx-auto relative z-20 py-10 sm:py-0 [zoom:0.7] md:[zoom:1]">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12">
-                    <div>
+                <div className="w-full h-full md:h-auto max-w-7xl mx-auto relative z-20 [zoom:0.7] md:[zoom:1] flex flex-col justify-center md:block">
+                  <div className="flex flex-col sm:flex-row justify-between items-center sm:items-end mb-8 sm:mb-12 absolute top-32 left-0 right-0 w-full md:relative md:top-auto md:left-auto md:right-auto md:w-auto scale-[1.3] md:scale-100 origin-top">
+                    <div className="w-full text-center sm:text-left">
                       <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4">Capacidades</h2>
                       <h3 className="text-3xl sm:text-5xl font-poppins font-bold leading-tight">Nuestro Ecosistema</h3>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10 md:mt-0">
                     {SERVICES_OVERVIEW.map((s, i) => (
                       <ServiceCard key={s.id} service={s} index={i} activeSection={activeSection} onPlay={setModalVideo} />
                     ))}
