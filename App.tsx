@@ -487,8 +487,8 @@ const App: React.FC = () => {
 
               <div className="horizontal-section flex items-center px-6 sm:px-10 md:px-20 relative">
                 <BackgroundVideo />
-                <div className="w-full max-w-[90rem] mx-auto relative z-20 [zoom:0.7] md:[zoom:1]">
-                  <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-6 -mt-20 md:mt-0">
+                <div className="w-full h-full md:h-auto max-w-[90rem] mx-auto relative z-20 [zoom:0.7] md:[zoom:1] flex flex-col justify-center md:block">
+                  <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-6 absolute top-32 left-0 right-0 w-full md:relative md:top-auto md:left-auto md:right-auto md:w-auto">
                     <div>
                       <h2 className="text-primary text-[0.625rem] font-black tracking-[0.5em] uppercase mb-4 text-center sm:text-left">Muestra</h2>
                       <h3 className="text-3xl sm:text-5xl font-poppins font-bold text-center sm:text-left">Portafolio</h3>
